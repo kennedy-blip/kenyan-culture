@@ -3,76 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Magical Kenya | Traveler's Hub 2026</title>
+    <title>Kenya Safari Guide 2026 | Tourist Hub</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <nav class="glass-nav">
-        <div class="logo">🇰🇪 <span>VisitKenya</span></div>
+        <div class="logo">🇰🇪 <span>SafariHub</span></div>
         <ul class="nav-links">
-            <li><a href="#destinations">Destinations</a></li>
-            <li><a href="#toolkit">Traveler Toolkit</a></li>
-            <li><a href="#culture">Culture</a></li>
+            <li><a href="#map-section">Safari Map</a></li>
+            <li><a href="#assistant">Voice Guide</a></li>
+            <li><a href="#virtual-museum">3D Gallery</a></li>
         </ul>
-        <button class="cta-btn">Book Safari</button>
     </nav>
 
-    <header class="hero">
-        <div class="hero-text">
-            <span class="badge">Authentic East Africa</span>
-            <h1>More Than a <br>Destination. <span>An Experience.</span></h1>
-            <p>From the heights of Mt. Kenya to the white sands of Diani, discover the 42 hearts of the Kenyan people.</p>
-            <div class="hero-btns">
-                <a href="#toolkit" class="btn-primary">Traveler Tools</a>
-                <a href="#destinations" class="btn-secondary">Explore Map</a>
-            </div>
+    <section id="map-section" class="map-container">
+        <div class="section-info">
+            <h2>Interactive Safari Map</h2>
+            <p>Click a marker to explore Kenya's iconic circuits.</p>
         </div>
-    </header>
+        <div id="safariMap"></div>
+    </section>
 
-    <section id="toolkit" class="toolkit-section">
-        <div class="section-header">
-            <h2>Tourist Toolkit</h2>
-            <p>Essential utilities for your journey.</p>
-        </div>
-        
-        <div class="tools-grid">
-            <div class="tool-card">
-                <h3>🗣️ Swahili Phrasebook</h3>
-                <div class="phrase-box">
-                    <p id="phrase-display">"Jambo" means "Hello"</p>
-                    <button onclick="nextPhrase()">Next Phrase</button>
-                </div>
+    <section id="assistant" class="tool-section">
+        <div class="tool-card voice-card">
+            <h2>🗣️ Swahili Voice Assistant</h2>
+            <p>Listen and learn the local dialect.</p>
+            <div class="voice-controls">
+                <button onclick="speakPhrase('Jambo! Karibu Kenya')">Hear "Welcome"</button>
+                <button onclick="speakPhrase('Habari yako?')">Hear "How are you?"</button>
             </div>
-
-            <div class="tool-card">
-                <h3>🕒 Local Context</h3>
-                <p>Nairobi Time: <span id="local-time">--:--</span></p>
-                <p>Status: <span class="status-tag">Peak Season</span></p>
-            </div>
-
-            <div class="tool-card">
-                <h3>💱 Budget Helper</h3>
-                <input type="number" id="usd-amount" placeholder="Amount in USD">
-                <p>≈ <span id="kes-amount">0</span> KES</p>
-            </div>
+            <div id="visualizer"><span></span><span></span><span></span></div>
         </div>
     </section>
 
-    <section id="destinations" class="destinations">
-        <h2>Signature Circuits</h2>
-        <div class="circuit-cards">
-            <div class="circuit-card">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?q=80&w=600');"></div>
-                <h4>The Savannah</h4>
-                <p>Maasai Mara & Amboseli</p>
-            </div>
-            <div class="circuit-card">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1589197331516-4d8458bb843e?q=80&w=600');"></div>
-                <h4>The Swahili Coast</h4>
-                <p>Lamu & Diani Beach</p>
-            </div>
+    <section id="virtual-museum" class="museum-section">
+        <h2>Virtual Cultural Gallery</h2>
+        <div class="aframe-container">
+            <p>Interact with the 3D Shield (Drag to Rotate)</p>
+            <a-scene embedded style="height: 400px; width: 100%;">
+                <a-sky color="#1a1a1a"></a-sky>
+                <a-entity position="0 1 -3">
+                    <a-cylinder color="#BB0000" height="2" radius="0.5" rotation="0 0 0"></a-cylinder>
+                    <a-cone color="#000" height="0.5" radius-bottom="0.5" position="0 1.2 0"></a-cone>
+                    <a-cone color="#000" height="0.5" radius-bottom="0.5" position="0 -1.2 0" rotation="180 0 0"></a-cone>
+                </a-entity>
+                <a-light type="ambient" color="#fff"></a-light>
+                <a-light type="point" intensity="1" position="2 4 4"></a-light>
+            </a-scene>
         </div>
     </section>
 

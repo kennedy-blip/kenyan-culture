@@ -1,38 +1,41 @@
-// 1. Swahili Phrasebook Logic
-const phrases = [
-    { swa: "Asante sana", eng: "Thank you very much" },
-    { swa: "Bei gani?", eng: "How much is this?" },
-    { swa: "Chakula kitamu", eng: "The food is delicious" },
-    { swa: "Safari njema", eng: "Have a safe journey" },
-    { swa: "Hapana asante", eng: "No thank you" }
+// --- 1. LEAFLET MAP INITIALIZATION ---
+const map = L.map('safariMap').setView([-1.286389, 36.817223], 6); // Centered on Nairobi
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap'
+}).addTo(map);
+
+// Safari Destinations Data
+const destinations = [
+    { name: "Maasai Mara", coords: [-1.5034, 35.1269], desc: "Great Migration & Big Five." },
+    { name: "Amboseli", coords: [-2.6349, 37.2513], desc: "Best views of Mt. Kilimanjaro." },
+    { name: "Diani Beach", coords: [-4.2797, 39.5947], desc: "Crystal clear coastal waters." },
+    { name: "Mt. Kenya", coords: [-0.1521, 37.3084], desc: "Highest peak in Kenya." }
 ];
 
-let currentPhrase = 0;
-function nextPhrase() {
-    currentPhrase = (currentPhrase + 1) % phrases.length;
-    const display = document.getElementById('phrase-display');
-    display.style.opacity = 0;
-    setTimeout(() => {
-        display.innerText = `"${phrases[currentPhrase].swa}" means "${phrases[currentPhrase].eng}"`;
-        display.style.opacity = 1;
-    }, 200);
-}
-
-// 2. Real-time Nairobi Time
-function updateTime() {
-    const options = { timeZone: 'Africa/Nairobi', hour: '2-digit', minute: '2-digit' };
-    const nairobiTime = new Intl.DateTimeFormat('en-GB', options).format(new Date());
-    document.getElementById('local-time').innerText = nairobiTime + " EAT";
-}
-setInterval(updateTime, 1000);
-updateTime();
-
-// 3. Simple Currency Estimator (Based on approx 2026 rates)
-const usdInput = document.getElementById('usd-amount');
-const kesOutput = document.getElementById('kes-amount');
-
-usdInput.addEventListener('input', (e) => {
-    const rate = 135.50; // Mock 2026 Exchange Rate
-    const result = e.target.value * rate;
-    kesOutput.innerText = result.toLocaleString();
+destinations.forEach(loc => {
+    L.marker(loc.coords).addTo(map)
+        .bindPopup(`<b>${loc.name}</b><br>${loc.desc}`);
 });
+
+// --- 2. SWAHILI VOICE ASSISTANT ---
+function speakPhrase(text) {
+    const synth = window.speechSynthesis;
+    const utterance = new SpeechSynthesisUtterance(text);
+    
+    // Try to find a Swahili-like or deep voice
+    const voices = synth.getVoices();
+    utterance.voice = voices.find(v => v.lang.includes('sw')) || voices[0];
+    utterance.rate = 0.9; // Slower for learning
+    
+    // Visualizer effect
+    const viz = document.getElementById('visualizer');
+    viz.classList.add('active');
+    
+    synth.speak(utterance);
+    
+    utterance.onend = () => viz.classList.remove('active');
+}
+
+// Ensure voices are loaded (Chrome fix)
+window.speechSynthesis.onvoiceschanged = () => { window.speechSynthesis.getVoices(); };
