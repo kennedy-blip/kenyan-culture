@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magical Kenya | Traveler's Hub 2026</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="glass-nav">
+        <div class="logo">🇰🇪 <span>VisitKenya</span></div>
+        <ul class="nav-links">
+            <li><a href="#destinations">Destinations</a></li>
+            <li><a href="#toolkit">Traveler Toolkit</a></li>
+            <li><a href="#culture">Culture</a></li>
+        </ul>
+        <button class="cta-btn">Book Safari</button>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-text">
+            <span class="badge">Authentic East Africa</span>
+            <h1>More Than a <br>Destination. <span>An Experience.</span></h1>
+            <p>From the heights of Mt. Kenya to the white sands of Diani, discover the 42 hearts of the Kenyan people.</p>
+            <div class="hero-btns">
+                <a href="#toolkit" class="btn-primary">Traveler Tools</a>
+                <a href="#destinations" class="btn-secondary">Explore Map</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="toolkit" class="toolkit-section">
+        <div class="section-header">
+            <h2>Tourist Toolkit</h2>
+            <p>Essential utilities for your journey.</p>
+        </div>
+        
+        <div class="tools-grid">
+            <div class="tool-card">
+                <h3>🗣️ Swahili Phrasebook</h3>
+                <div class="phrase-box">
+                    <p id="phrase-display">"Jambo" means "Hello"</p>
+                    <button onclick="nextPhrase()">Next Phrase</button>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <h3>🕒 Local Context</h3>
+                <p>Nairobi Time: <span id="local-time">--:--</span></p>
+                <p>Status: <span class="status-tag">Peak Season</span></p>
+            </div>
+
+            <div class="tool-card">
+                <h3>💱 Budget Helper</h3>
+                <input type="number" id="usd-amount" placeholder="Amount in USD">
+                <p>≈ <span id="kes-amount">0</span> KES</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="destinations" class="destinations">
+        <h2>Signature Circuits</h2>
+        <div class="circuit-cards">
+            <div class="circuit-card">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?q=80&w=600');"></div>
+                <h4>The Savannah</h4>
+                <p>Maasai Mara & Amboseli</p>
+            </div>
+            <div class="circuit-card">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1589197331516-4d8458bb843e?q=80&w=600');"></div>
+                <h4>The Swahili Coast</h4>
+                <p>Lamu & Diani Beach</p>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
