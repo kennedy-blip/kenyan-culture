@@ -1,41 +1,41 @@
-// --- 1. LEAFLET MAP INITIALIZATION ---
-const map = L.map('safariMap').setView([-1.286389, 36.817223], 6); // Centered on Nairobi
+// 1. LEAFLET MAP & WEATHER DATA
+const map = L.map('safariMap').setView([-1.286, 36.817], 6);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap'
-}).addTo(map);
-
-// Safari Destinations Data
 const destinations = [
-    { name: "Maasai Mara", coords: [-1.5034, 35.1269], desc: "Great Migration & Big Five." },
-    { name: "Amboseli", coords: [-2.6349, 37.2513], desc: "Best views of Mt. Kilimanjaro." },
-    { name: "Diani Beach", coords: [-4.2797, 39.5947], desc: "Crystal clear coastal waters." },
-    { name: "Mt. Kenya", coords: [-0.1521, 37.3084], desc: "Highest peak in Kenya." }
+    { name: "Nairobi", coords: [-1.286, 36.817], temp: "23°C", desc: "Sunny Skies" },
+    { name: "Maasai Mara", coords: [-1.503, 35.126], temp: "24°C", desc: "Mostly Cloudy" },
+    { name: "Diani Beach", coords: [-4.279, 39.594], temp: "29°C", desc: "Humid & Breezy" }
 ];
 
 destinations.forEach(loc => {
-    L.marker(loc.coords).addTo(map)
-        .bindPopup(`<b>${loc.name}</b><br>${loc.desc}`);
+    let marker = L.marker(loc.coords).addTo(map).bindPopup(`<b>${loc.name}</b>`);
+    marker.on('click', () => {
+        document.getElementById('location-name').innerText = loc.name;
+        document.getElementById('temp-val').innerText = loc.temp;
+        document.getElementById('weather-desc').innerText = loc.desc;
+    });
 });
 
-// --- 2. SWAHILI VOICE ASSISTANT ---
+// 2. SWAHILI VOICE ASSISTANT
 function speakPhrase(text) {
     const synth = window.speechSynthesis;
     const utterance = new SpeechSynthesisUtterance(text);
-    
-    // Try to find a Swahili-like or deep voice
-    const voices = synth.getVoices();
-    utterance.voice = voices.find(v => v.lang.includes('sw')) || voices[0];
-    utterance.rate = 0.9; // Slower for learning
-    
-    // Visualizer effect
     const viz = document.getElementById('visualizer');
+    
+    utterance.lang = 'sw-KE'; 
+    utterance.rate = 0.85;
+    
     viz.classList.add('active');
-    
     synth.speak(utterance);
-    
     utterance.onend = () => viz.classList.remove('active');
 }
 
-// Ensure voices are loaded (Chrome fix)
-window.speechSynthesis.onvoiceschanged = () => { window.speechSynthesis.getVoices(); };
+// 3. LIVE KENYAN TIME (EAT)
+function updateTime() {
+    const options = { timeZone: 'Africa/Nairobi', hour: '2-digit', minute: '2-digit' };
+    const eatTime = new Intl.DateTimeFormat('en-GB', options).format(new Date());
+    document.getElementById('local-time').innerText = eatTime;
+}
+setInterval(updateTime, 1000);
+updateTime();

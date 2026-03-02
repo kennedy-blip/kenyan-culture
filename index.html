@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kenya Safari Guide 2026 | Tourist Hub</title>
+    <title>Magical Kenya 2026 | Tourist Hub</title>
     
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -21,44 +21,73 @@
             <li><a href="#assistant">Voice Guide</a></li>
             <li><a href="#virtual-museum">3D Gallery</a></li>
         </ul>
+        <button class="cta-btn">Enquire Now</button>
     </nav>
+
+    <header class="hero">
+        <div class="hero-text">
+            <span class="badge">Live 2026 Update</span>
+            <h1>The Heart of <br><span>East Africa.</span></h1>
+            <p>Explore Kenya's 42 cultures and legendary landscapes through our interactive traveler's portal.</p>
+        </div>
+    </header>
 
     <section id="map-section" class="map-container">
         <div class="section-info">
             <h2>Interactive Safari Map</h2>
-            <p>Click a marker to explore Kenya's iconic circuits.</p>
+            <p>Click markers to view real-time circuit details.</p>
         </div>
         <div id="safariMap"></div>
+    </section>
+
+    <section id="weather-hub" class="tool-section">
+        <div class="weather-card voice-card">
+            <h2>🌦️ Live Safari Weather</h2>
+            <p id="location-name">Select a destination on the map</p>
+            <div class="weather-display">
+                <span id="temp-val">--°C</span>
+                <span id="weather-desc">Awaiting selection</span>
+            </div>
+            <p class="small-text">Local Time: <span id="local-time">--:--</span> EAT</p>
+        </div>
     </section>
 
     <section id="assistant" class="tool-section">
         <div class="tool-card voice-card">
             <h2>🗣️ Swahili Voice Assistant</h2>
-            <p>Listen and learn the local dialect.</p>
+            <p>Click a phrase to hear the correct local pronunciation.</p>
             <div class="voice-controls">
-                <button onclick="speakPhrase('Jambo! Karibu Kenya')">Hear "Welcome"</button>
-                <button onclick="speakPhrase('Habari yako?')">Hear "How are you?"</button>
+                <button onclick="speakPhrase('Jambo! Karibu Kenya')">Welcome</button>
+                <button onclick="speakPhrase('Habari yako?')">How are you?</button>
+                <button onclick="speakPhrase('Chakula kitamu sana')">Delicious Food</button>
             </div>
             <div id="visualizer"><span></span><span></span><span></span></div>
         </div>
     </section>
 
     <section id="virtual-museum" class="museum-section">
-        <h2>Virtual Cultural Gallery</h2>
+        <div class="section-info">
+            <h2>Virtual Cultural Gallery</h2>
+            <p>Interact with 3D Kenyan artifacts (Rotate using mouse/touch)</p>
+        </div>
         <div class="aframe-container">
-            <p>Interact with the 3D Shield (Drag to Rotate)</p>
-            <a-scene embedded style="height: 400px; width: 100%;">
-                <a-sky color="#1a1a1a"></a-sky>
-                <a-entity position="0 1 -3">
-                    <a-cylinder color="#BB0000" height="2" radius="0.5" rotation="0 0 0"></a-cylinder>
-                    <a-cone color="#000" height="0.5" radius-bottom="0.5" position="0 1.2 0"></a-cone>
-                    <a-cone color="#000" height="0.5" radius-bottom="0.5" position="0 -1.2 0" rotation="180 0 0"></a-cone>
+            <a-scene embedded style="height: 500px; width: 100%;">
+                <a-sky color="#0a0a0a"></a-sky>
+                <a-entity position="0 1.5 -3" animation="property: rotation; to: 0 360 0; loop: true; dur: 10000; easing: linear">
+                    <a-cylinder color="#BB0000" height="2" radius="0.5"></a-cylinder>
+                    <a-cone color="#000" height="0.6" radius-bottom="0.5" position="0 1.3 0"></a-cone>
+                    <a-cone color="#000" height="0.6" radius-bottom="0.5" position="0 -1.3 0" rotation="180 0 0"></a-cone>
                 </a-entity>
                 <a-light type="ambient" color="#fff"></a-light>
-                <a-light type="point" intensity="1" position="2 4 4"></a-light>
+                <a-light type="point" intensity="1.5" position="2 4 4"></a-light>
+                <a-camera position="0 1.5 2"></a-camera>
             </a-scene>
         </div>
     </section>
+
+    <footer>
+        <p>&copy; 2026 Magical Kenya Tourist Hub. Developed for Authenticity.</p>
+    </footer>
 
     <script src="script.js"></script>
 </body>
